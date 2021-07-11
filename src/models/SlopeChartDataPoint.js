@@ -1,6 +1,6 @@
 export default class SlopeChartDataPoint {
-  constructor(name, start, end) {
-    this.name = name;
+  constructor(key, start, end) {
+    this.key = key;
     this.start = start;
     this.end = end;
   }

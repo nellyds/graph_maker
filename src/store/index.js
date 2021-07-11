@@ -6,38 +6,42 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     value: "hello",
-    chart_data: [
-      { start: 2355, end: 5853, name: "Lor" },
-      { start: 4260, end: 6510, name: "Ipsum" },
-      { start: 5029, end: 5138, name: "Dolor" },
-    ],
     dataSet: [],
+    mode: null,
   },
   mutations: {
     appendToDataSet(state, data) {
-      console.log(data);
       state.dataSet = [...state.dataSet, data.argument];
     },
+    changeMode(state, data) {
+      state.mode = data.data;
+    },
     deleteDataPoint(state, data) {
-      let arr = state.dataSet;
       console.log(data);
+      let arr = state.dataSet;
       let newArr = arr.filter((d) => {
-        return d.name !== data.data;
+        return d.key !== data.data;
       });
       state.dataSet = newArr;
     },
   },
   actions: {
     appendToDataSet(context, data) {
-      console.log(data);
       context.commit({
         type: "appendToDataSet",
         argument: data.data,
       });
     },
     deleteDataPoint(context, data) {
+      console.log(data);
       context.commit({
         type: "deleteDataPoint",
+        data: data.data,
+      });
+    },
+    changeMode(context, data) {
+      context.commit({
+        type: "changeMode",
         data: data.data,
       });
     },
